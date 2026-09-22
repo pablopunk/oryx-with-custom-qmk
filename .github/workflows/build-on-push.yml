@@ -1,0 +1,56 @@
+name: Build on push
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '6JzXq/**'
+      - 'Dockerfile'
+      - '.github/workflows/build-on-push.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  build-layout:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v5
+        with:
+          submodules: false
+
+      - name: Update QMK firmware submodule to firmware25
+        run: |
+          git submodule update --init --remote --depth=1 --no-single-branch
+          cd qmk_firmware
+          git checkout -B firmware25 origin/firmware25
+          git submodule update --init --recursive
+          cd ..
+
+      - name: Build qmk docker image
+        run: docker build -t qmk .
+
+      - name: Build the layout
+        id: build-layout
+        run: |
+          keyboard_directory="qmk_firmware/keyboards/zsa"
+          make_prefix="zsa/"
+          layout_id="6JzXq"
+          layout_geometry="voyager"
+          rm -rf ${keyboard_directory}/${layout_geometry}/keymaps/${layout_id}
+          mkdir -p ${keyboard_directory}/${layout_geometry}/keymaps && cp -r ${layout_id} "$_"
+          docker run -v ./qmk_firmware:/root --rm qmk /bin/sh -c "
+            qmk setup zsa/qmk_firmware -b firmware25 -y
+            make ${make_prefix}${layout_geometry}:${layout_id}
+          "
+          normalized_layout_geometry="voyager"
+          echo built_layout_file=$(find ./qmk_firmware -maxdepth 1 -type f -regex ".*${normalized_layout_geometry}.*\.\(bin\|hex\)$") >> "$GITHUB_OUTPUT"
+          echo normalized_layout_geometry=${normalized_layout_geometry} >> "$GITHUB_OUTPUT"
+
+      - name: Upload layout
+        uses: actions/upload-artifact@v7
+        with:
+          name: voyager_6JzXq
+          path: ${{ steps.build-layout.outputs.built_layout_file }}
