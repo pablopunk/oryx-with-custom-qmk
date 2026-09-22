@@ -15,9 +15,6 @@ enum layers {
 
 enum custom_keycodes {
   RGB_SLD = ZSA_SAFE_RANGE,
-  HSV_122_255_255,
-  HSV_198_255_255,
-  HSV_122_13_255,
   HYPER3,
 };
 
@@ -26,23 +23,23 @@ enum custom_keycodes {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [0] = LAYOUT_voyager(
-    KC_ESCAPE,      KC_1,           KC_2,           KC_3,           KC_4,           KC_5,                                           KC_6,           KC_7,           KC_8,           KC_9,           KC_0,           KC_MINUS,       
+    KC_TRANSPARENT, KC_1,           KC_2,           KC_3,           KC_4,           KC_5,                                           KC_6,           KC_7,           KC_8,           KC_9,           KC_0,           KC_MINUS,       
     LT(2, KC_TAB),  KC_Q,           KC_W,           KC_E,           KC_R,           KC_T,                                           KC_Y,           KC_U,           KC_I,           KC_O,           KC_P,           KC_RBRC,        
-    KC_LEFT_SHIFT,  KC_A,           KC_S,           KC_D,           KC_F,           KC_G,                                           KC_H,           KC_J,           KC_K,           KC_L,           KC_SCLN,        KC_QUOTE,       
-    KC_LEFT_ALT,    KC_Z,           KC_X,           KC_C,           KC_V,           KC_B,                                           KC_N,           KC_M,           KC_COMMA,       KC_DOT,         KC_SLASH,       KC_LBRC,        
-                                                    TG(_MOD),    MT(MOD_LALT | MOD_LCTL | MOD_LGUI, KC_BSPC),                                MT(MOD_LCTL, KC_ENTER),LT(1, KC_SPACE)
+    KC_ESCAPE,      KC_A,           KC_S,           KC_D,           KC_F,           KC_G,                                           KC_H,           KC_J,           KC_K,           KC_L,           KC_SCLN,        KC_QUOTE,       
+    KC_TRANSPARENT, KC_Z,           KC_X,           KC_C,           KC_V,           KC_B,                                           KC_N,           KC_M,           KC_COMMA,       KC_DOT,         KC_SLASH,       KC_LBRC,        
+                                                    TG(_MOD),    MT(MOD_LSFT, KC_BSPC),                                MT(MOD_LCTL, KC_ENTER),LT(1, KC_SPACE)
   ),
   [1] = LAYOUT_voyager(
-    RALT(KC_GRAVE), RALT(KC_1),     RALT(KC_2),     RALT(KC_3),     KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_DELETE,      
-    KC_TRANSPARENT, KC_AUDIO_MUTE,  KC_AUDIO_VOL_DOWN,KC_AUDIO_VOL_UP,RGB_MODE_FORWARD,HSV_122_255_255,                                RALT(KC_LBRC),  RALT(KC_RBRC),  RALT(KC_QUOTE), RALT(KC_BSLS),  KC_TRANSPARENT, KC_TRANSPARENT, 
-    KC_TRANSPARENT, KC_MEDIA_PREV_TRACK,KC_MEDIA_PLAY_PAUSE,KC_MEDIA_NEXT_TRACK,RGB_SPD,        HSV_198_255_255,                                KC_LEFT,        KC_DOWN,        KC_UP,          KC_RIGHT,       RALT(KC_SCLN),  KC_TRANSPARENT, 
-    KC_TRANSPARENT, KC_GRAVE,       LSFT(KC_GRAVE), KC_TRANSPARENT, RGB_SPI,        HSV_122_13_255,                                 KC_MS_WH_DOWN,  KC_MS_WH_UP,    KC_NUBS,        LSFT(KC_NUBS),  KC_TRANSPARENT, KC_BSLS,        
+    KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_DELETE,      
+    RALT(KC_GRAVE), RALT(KC_1),     RALT(KC_2),     RALT(KC_3),     RALT(KC_4),     RALT(KC_5),                                     RALT(KC_LBRC),  RALT(KC_RBRC),  RALT(KC_QUOTE), RALT(KC_BSLS),  LSFT(KC_0),     LSFT(KC_RBRC),  
+    KC_GRAVE,       LSFT(KC_1),     KC_2,           LSFT(KC_3),     LSFT(KC_4),     KC_5,                                           KC_LEFT,        KC_DOWN,        KC_UP,          KC_RIGHT,       RALT(KC_SCLN),  LSFT(KC_MINUS), 
+    LSFT(KC_GRAVE), KC_NUBS,        LSFT(KC_NUBS),  KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                 LSFT(KC_8),     LSFT(KC_9),     KC_TRANSPARENT, KC_TRANSPARENT, LSFT(KC_7),     KC_BSLS,        
                                                     TO(2),          KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_TRANSPARENT
   ),
   [2] = LAYOUT_voyager(
     KC_TRANSPARENT, KC_F1,          KC_F2,          KC_F3,          KC_F4,          KC_F5,                                          KC_F6,          KC_F7,          KC_F8,          KC_F9,          KC_F10,         KC_F11,         
-    KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_7,           KC_8,           KC_9,           KC_TRANSPARENT, KC_F12,         
-    KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_4,           KC_5,           KC_6,           KC_TRANSPARENT, KC_TRANSPARENT, 
+    KC_TRANSPARENT, KC_AUDIO_MUTE,  KC_AUDIO_VOL_DOWN,KC_AUDIO_VOL_UP,KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_7,           KC_8,           KC_9,           KC_TRANSPARENT, KC_F12,         
+    KC_TRANSPARENT, KC_MEDIA_PREV_TRACK,KC_MEDIA_PLAY_PAUSE,KC_MEDIA_NEXT_TRACK,KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_4,           KC_5,           KC_6,           KC_TRANSPARENT, KC_TRANSPARENT, 
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_0,           KC_1,           KC_2,           KC_3,           KC_TRANSPARENT, TO(3),          
                                                     TO(0),          KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_TRANSPARENT
   ),
@@ -140,7 +137,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   case QK_MODS ... QK_MODS_MAX:
     // Mouse and consumer keys (volume, media) with modifiers work inconsistently across operating systems,
     // this makes sure that modifiers are always applied to the key that was pressed.
-    if (IS_MOUSE_KEYCODE(QK_MODS_GET_BASIC_KEYCODE(keycode)) || IS_CONSUMER_KEYCODE(QK_MODS_GET_BASIC_KEYCODE(keycode))) {
+    if (IS_CONSUMER_KEYCODE(QK_MODS_GET_BASIC_KEYCODE(keycode))) {
       if (record->event.pressed) {
         add_mods(QK_MODS_GET_MODS(keycode));
         send_keyboard_report();
@@ -164,24 +161,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         register_mods(MOD_BIT(KC_LALT) | MOD_BIT(KC_LCTL) | MOD_BIT(KC_LGUI));
       } else {
         unregister_mods(MOD_BIT(KC_LALT) | MOD_BIT(KC_LCTL) | MOD_BIT(KC_LGUI));
-      }
-      return false;
-    case HSV_122_255_255:
-      if (record->event.pressed) {
-        rgblight_mode(1);
-        rgblight_sethsv(122,255,255);
-      }
-      return false;
-    case HSV_198_255_255:
-      if (record->event.pressed) {
-        rgblight_mode(1);
-        rgblight_sethsv(198,255,255);
-      }
-      return false;
-    case HSV_122_13_255:
-      if (record->event.pressed) {
-        rgblight_mode(1);
-        rgblight_sethsv(122,13,255);
       }
       return false;
   }
